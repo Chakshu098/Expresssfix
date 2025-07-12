@@ -1,17 +1,13 @@
 import React from 'react';
 import { Search, Bell, User } from 'lucide-react';
-import logo from '/Express.png';
 
 function Header() {
   return (
     <header className="bg-gradient-to-r from-purple-600 to-purple-700 text-white p-6">
       <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <img src={logo} alt="ExpressFix Logo" className="w-16 h-16 mr-4 rounded" />
-          <div>
-            <h1 className="text-2xl font-bold mb-1">Welcome back!</h1>
-            <p className="text-purple-100">Let's enhance your designs with AI-powered tools</p>
-          </div>
+        <div>
+          <h1 className="text-2xl font-bold mb-1">Welcome back!</h1>
+          <p className="text-purple-100">Let's enhance your designs with AI-powered tools</p>
         </div>
         
         <div className="flex items-center space-x-4">

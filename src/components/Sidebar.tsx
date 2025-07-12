@@ -32,9 +32,7 @@ function Sidebar() {
       {/* Logo */}
       <div className="p-6 border-b border-gray-700">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">E</span>
-          </div>
+          <img src="/Express.png" alt="ExpressFix Logo" className="w-8 h-8 rounded-lg" />
           <div>
             <div className="font-bold text-lg">ExpressFix</div>
             <div className="text-gray-400 text-sm">AI Design Platform</div>
