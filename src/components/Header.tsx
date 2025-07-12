@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, Bell, User, Settings, LogOut, Mail, Calendar, Award } from 'lucide-react';
+import { useAuthContext } from './AuthProvider';
+import { authService } from '../lib/database';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+  const { profile } = useAuthContext();
+  const navigate = useNavigate();
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -54,6 +59,11 @@ function Header() {
   const markAllAsRead = () => {
     // In a real app, this would update the backend
     console.log('Marking all notifications as read');
+  };
+
+  const handleSignOut = async () => {
+    await authService.signOut();
+    navigate('/auth');
   };
 
   return (
@@ -153,7 +163,7 @@ function Header() {
               <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
                 <User className="w-4 h-4" />
               </div>
-              <span className="text-sm font-medium">John Doe</span>
+              <span className="text-sm font-medium">{profile?.full_name || profile?.email || 'User'}</span>
             </button>
             
             {/* Profile Dropdown */}
@@ -165,8 +175,8 @@ function Header() {
                       <User className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">John Doe</h3>
-                      <p className="text-sm text-gray-600">john.doe@example.com</p>
+                      <h3 className="font-semibold text-gray-900">{profile?.full_name || 'User'}</h3>
+                      <p className="text-sm text-gray-600">{profile?.email}</p>
                     </div>
                   </div>
                 </div>
@@ -199,7 +209,10 @@ function Header() {
                 </div>
                 
                 <div className="p-2 border-t border-gray-200">
-                  <button className="w-full flex items-center space-x-3 px-3 py-2 text-left text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                  <button 
+                    onClick={handleSignOut}
+                    className="w-full flex items-center space-x-3 px-3 py-2 text-left text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  >
                     <LogOut className="w-4 h-4" />
                     <span className="text-sm">Sign Out</span>
                   </button>
