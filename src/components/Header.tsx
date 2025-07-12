@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search, Bell, User } from 'lucide-react';
-import logo from '../../Express.png';
+import logo from '/Express.png';
 
 function Header() {
   return (
